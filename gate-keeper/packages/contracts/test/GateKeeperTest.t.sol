@@ -23,6 +23,7 @@ import { CharactersByAddressTable } from "@eveworld/world/src/codegen/tables/Cha
 import { DeployableState, DeployableStateData } from "@eveworld/world/src/codegen/tables/DeployableState.sol";
 import { State } from "@eveworld/world/src/modules/smart-deployable/types.sol";
 import { EphemeralInvItemTableData, EphemeralInvItemTable } from "@eveworld/world/src/codegen/tables/EphemeralInvItemTable.sol";
+import { GlobalDeployableState } from "@eveworld/world/src/codegen/tables/GlobalDeployableState.sol";
 
 import { IWorld } from "../src/codegen/world/IWorld.sol";
 import { Utils } from "../src/systems/gate_keeper/Utils.sol";
@@ -142,7 +143,7 @@ contract GateKeeperTest is MudTest {
     );
   }
 
-  function depositToGateKeeper() public {
+  function testdepositToGateKeeper() public {
     testConfigureGateKeeper();
     //Make sure the SSU is configured as gatekeeper
     uint256 smartStorageUnitId = vm.envUint("SSU_ID");

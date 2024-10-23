@@ -16,6 +16,7 @@
     "prettier": "prettier --write 'src/**/*.sol'",
     "solhint": "solhint --config ./.solhint.json 'src/**/*.sol' --fix",
     "test": "tsc --noEmit && mud test",
+    "test:dev": ". ./.env && forge test --fork-url $RPC_URL",
     "mock-data": ". ./.env && pnpm forge script ./script/MockSsuData.s.sol:MockSsuData --broadcast --rpc-url $RPC_URL --chain-id $CHAIN_ID --sig \"run(address)\" $WORLD_ADDRESS -vvv",
     "configure-item-trade": ". ./.env && pnpm forge script ./script/ConfigureItemTrade.s.sol:ConfigureItemTrade --broadcast --rpc-url $RPC_URL --chain-id $CHAIN_ID --sig \"run(address)\" $WORLD_ADDRESS -vvv",
     "approve": ". ./.env && pnpm forge script ./script/ApproveToken.s.sol:ApproveToken --broadcast --rpc-url $RPC_URL --chain-id $CHAIN_ID --sig \"run(address)\" $WORLD_ADDRESS -vvv",

@@ -88,10 +88,6 @@ contract VendingMachineSystem is System {
 
     uint256 itemObjectIdOut = RatioConfig.getItemOut(smartObjectId, inventoryItemIdIn);
 
-    EntityRecordTableData memory itemInEntity = EntityRecordTable.get(inventoryItemIdIn);
-
-    EntityRecordTableData memory itemOutEntity = EntityRecordTable.get(itemObjectIdOut);
-
     TransferItem[] memory inItems = new TransferItem[](1);
     inItems[0] = TransferItem(inventoryItemIdIn, ssuOwner, quantity);
 

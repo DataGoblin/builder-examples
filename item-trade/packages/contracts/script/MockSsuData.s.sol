@@ -140,10 +140,12 @@ contract MockSsuData is Script {
       (address)
     );
 
+    console.log("BEFORE");
     //Approve some ERC20 tokens to the item seller contract for the Salt buyer
-    // erc20.approve(itemSellerAddress, 10000000 * 1 ether);
-    erc20.transfer(itemSellerAddress, 10000000 * 1 ether);
+    erc20.approve(itemSellerAddress, 10 * 1 ether);
+    erc20.transfer(itemSellerAddress, 10 * 1 ether);
 
+    console.log("AFTER");
     vm.stopBroadcast();
   }
 
