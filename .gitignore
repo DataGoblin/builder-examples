@@ -3,4 +3,10 @@ mock-data/node_modules/
 mock-data/node_modules/.pnpm/
 mock-data/out/
 mock-data/broadcast/
+vending-machine/packages/contracts/.env
+smart-turret/packages/contracts/.env
+smart-gate/packages/contracts/.env
+deprecated/gate-keeper/contracts/.env
+deprecated/item-seller/contracts/.env
+deprecated/item-trade/contracts/.env
 .DS_Store
