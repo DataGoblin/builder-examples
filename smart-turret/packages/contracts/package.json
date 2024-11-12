@@ -8,7 +8,7 @@
     "clean": "forge clean && shx rm -rf src/**/codegen",
     "deploy:local": "mud deploy",
     "deploy:devnet": "pnpm run build && mud deploy --profile=devnet",
-    "deploy:testnet": "pnpm run build && mud deploy --profile=testnet",
+    "deploy:testnet": "pnpm run build && mud deploy --profile=garnet",
     "deploy:garnet": "pnpm run build && mud deploy --profile=garnet",
     "deploy:redstone": "pnpm run build && mud deploy --profile=redstone",
     "dev": "mud dev-contracts",

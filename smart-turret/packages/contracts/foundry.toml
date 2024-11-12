@@ -33,7 +33,7 @@ eth_rpc_url = "https://testnet-game-sync.nursery.reitnorf.com"
 
 [profile.garnet]
 # Public Testnet
-eth_rpc_url = "https://rpc.garnetchain.com"
+eth_rpc_url = "https://garnet-rpc.dev.evefrontier.tech"
 
 [profile.redstone]
 # Public Mainnet
