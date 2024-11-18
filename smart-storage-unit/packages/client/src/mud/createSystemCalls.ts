@@ -121,11 +121,13 @@ export function createSystemCalls(
 		return useStore.getState().getValue(tables.ItemQuantityMultipleForToken, {smartObjectId})
 	}
 
-	const SetRatio = async (smartObjectId, quantity) => {
-		await worldContract.write.test__SetRatios([
+	const SetRatio = async (smartObjectId, quantityIn, quantityOut) => {
+		await worldContract.write.test__setRatio([
 			BigInt(smartObjectId),
 			BigInt(itemInId),
-			BigInt(quantity),
+			BigInt(itemOutId),
+			quantityIn,
+			quantityOut
 		]);
 		return;
 	};
