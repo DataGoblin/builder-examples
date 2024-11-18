@@ -28,8 +28,8 @@ const SetRatio = React.memo(function SetRatio({
 		setItemPriceWei(Number(sellPriceData?.tokenAmount ?? 0));
 	};
 
-	const itemMultipleValueRef = useRef(0);
-	const itemPriceWeiValueRef = useRef(0);
+	const itemInValueRef = useRef(0);
+	const itemOutValueRef = useRef(0);
 
 	const handleEdit = (
 		refString: React.MutableRefObject<number>,
@@ -74,29 +74,29 @@ const SetRatio = React.memo(function SetRatio({
 						inputType="numerical"
 						defaultValue={1}
 						fieldName={`Item in: ${itemInId}`}
-						onChange={(str) => handleEdit(itemMultipleValueRef, str as number)}
+						onChange={(str) => handleEdit(itemInValueRef, str as number)}
 					></EveInput>
 
 					<EveInput
 						inputType="numerical"
 						defaultValue={undefined}
 						fieldName={`Item out: ${itemOutId}`}
-						onChange={(str) => handleEdit(itemPriceWeiValueRef, str as number)}
+						onChange={(str) => handleEdit(itemOutValueRef, str as number)}
 					></EveInput>
 					<div>
 						<EveButton
 							typeClass="primary"
 							onClick={async (event) => {
 								event.preventDefault();
-								await setSellConfig(
+								await SetRatio(
 									smartAssemblyId,
-									itemMultipleValueRef.current,
-									parseEther(itemPriceWeiValueRef.current.toString())
+									itemInValueRef.current,
+									itemOutValueRef.current,
 								);
 								fetchItemSellData();
 							}}
 						>
-							Set Item Price
+							Set Ratio
 						</EveButton>
 					</div>
 				</div>

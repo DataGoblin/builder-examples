@@ -40,7 +40,6 @@ const BuyItem = React.memo(function BuyItem({
 
 	return (
 		<>
-
 			<div className="Quantum-Container my-4">
 				<div>Trade Item</div>
 				<div className="flex items-start flex-col gap-3">
