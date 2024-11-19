@@ -24,12 +24,12 @@
   "dependencies": {
     "@eveworld/common-constants": "0.0.13",
     "@eveworld/world": "0.0.17",
-    "@latticexyz/cli": "2.2.14",
-    "@latticexyz/explorer": "2.2.14",
-    "@latticexyz/schema-type": "2.2.14",
-    "@latticexyz/store": "2.2.14",
-    "@latticexyz/world": "2.2.14",
-    "@latticexyz/world-modules": "2.2.14",
+    "@latticexyz/cli": "2.2.15-entrykit-1c24e4739090d185171d9f8e4a257735e4710b70",
+    "@latticexyz/explorer": "2.2.15-entrykit-1c24e4739090d185171d9f8e4a257735e4710b70",
+    "@latticexyz/schema-type": "2.2.15-entrykit-1c24e4739090d185171d9f8e4a257735e4710b70",
+    "@latticexyz/store": "2.2.15-entrykit-1c24e4739090d185171d9f8e4a257735e4710b70",
+    "@latticexyz/world": "2.2.15-entrykit-1c24e4739090d185171d9f8e4a257735e4710b70",
+    "@latticexyz/world-modules": "2.2.15-entrykit-1c24e4739090d185171d9f8e4a257735e4710b70",
     "i": "^0.3.7",
     "npm": "^10.8.0"
   },

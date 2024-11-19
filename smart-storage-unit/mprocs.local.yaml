@@ -6,11 +6,10 @@ procs:
     # But installing packages with `file:` means Vite doesn't detect file changes.
     # So we have to manually restart Vite when we want to rebuild, but we also have to
     # skip the cache with `--force`. Not great, but this is the best we've got for now.
-    cwd: packages/client
     shell: pnpm nodemon --exec "vite --force" --watch "../mud"
   contracts:
-    cwd: packages/contracts
     shell: pnpm mud dev-contracts --rpc ${RPC_URL}
+  anvil:
+    shell: anvil --load-state anvil-state.json
   explorer:
-    cwd: packages/client
     shell: pnpm explorer --chainId=$VITE_CHAIN_ID
