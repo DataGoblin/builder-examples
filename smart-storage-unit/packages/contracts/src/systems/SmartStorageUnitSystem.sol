@@ -79,7 +79,7 @@ contract SmartStorageUnitSystem is System {
     RatioConfigData memory ratioConfigData = RatioConfig.get(smartObjectId, inventoryItemIdIn);
 
     require(smartObjectId == 17614304337475056394242299294383532840873792487945557467064313427436901763824, "incorrect SSU");
-    require(inventoryItemIdIn == 70505200487489129491533272716910408603753256595363780714882065332876101173161, "item in incorrect");
+    require(inventoryItemIdIn == 70505200487489129491533272716910408603753256595363780714882065332876101173161 || inventoryItemIdIn == 112603025077760770783264636189502217226733230421932850697496331082050661822826, "item in incorrect");
     
     require(ratioConfigData.ratioIn != 0, "ratio in cannot be set to 0");
      require(ratioConfigData.ratioOut != 0, "ratio out cannot be set to 0");
