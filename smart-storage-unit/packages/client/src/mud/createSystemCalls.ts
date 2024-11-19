@@ -132,6 +132,16 @@ export function createSystemCalls(
 		return;
 	};
 
+	
+	const makeTrade = async (smartObjectId, quantity, inventoryItemIn) => {
+		await worldContract.write.test__execute([
+			BigInt(smartObjectId),
+			quantity,
+			BigInt(inventoryItemIn)
+		]);
+		return;
+	};
+
 
 	const collectTokens = async (address) => {
 		await worldContract.write.test__collectTokens([smartObjectId]);
@@ -150,5 +160,6 @@ export function createSystemCalls(
 		getItemSellData,
 		setSellConfig,
 		SetRatio,
+		makeTrade
 	};
 }

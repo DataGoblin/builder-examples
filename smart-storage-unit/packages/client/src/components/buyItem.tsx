@@ -5,10 +5,10 @@ import { formatEther, parseEther } from "viem";
 
 const BuyItem = React.memo(function BuyItem({
 	smartAssemblyId,
-	itemOutId,
+	itemInId,
 }: {
 	smartAssemblyId: bigint;
-	itemOutId: string;
+	itemInId: string;
 }) {
 	const [itemPriceWei, setItemPriceWei] = useState<number | undefined>();
 	const [itemQuantity, setItemQuantity] = useState<number | undefined>();
@@ -21,6 +21,7 @@ const BuyItem = React.memo(function BuyItem({
 			getItemPriceData,
 			purchaseItem,
 			getErc20Balance,
+			makeTrade
 		},
 	} = useMUD();
 
@@ -54,7 +55,13 @@ const BuyItem = React.memo(function BuyItem({
 							typeClass="primary"
 							onClick={async (event) => {
 								event.preventDefault();
-								await purchaseItem(itemQuantity);
+								await makeTrade(
+									smartAssemblyId,
+									itemInId,
+									itemQuantity
+								);
+								console.log(itemInId)
+								console.log(`QUANTITY: ${itemQuantity}`)
 							}}
 						>
 							Purchase items

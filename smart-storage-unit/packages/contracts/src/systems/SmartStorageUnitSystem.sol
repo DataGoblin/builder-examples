@@ -7,6 +7,8 @@ import { WorldResourceIdLib } from "@latticexyz/world/src/WorldResourceId.sol";
 import { IBaseWorld } from "@latticexyz/world/src/codegen/interfaces/IBaseWorld.sol";
 import { System } from "@latticexyz/world/src/System.sol";
 
+import { console } from "forge-std/console.sol";
+
 import { IERC721 } from "@eveworld/world/src/modules/eve-erc721-puppet/IERC721.sol";
 import { InventoryLib } from "@eveworld/world/src/modules/inventory/InventoryLib.sol";
 import { InventoryItem } from "@eveworld/world/src/modules/inventory/types.sol";
@@ -75,6 +77,12 @@ contract SmartStorageUnitSystem is System {
    */
   function execute(uint256 smartObjectId, uint256 quantity, uint256 inventoryItemIdIn) public {
     RatioConfigData memory ratioConfigData = RatioConfig.get(smartObjectId, inventoryItemIdIn);
+
+    require(smartObjectId == 17614304337475056394242299294383532840873792487945557467064313427436901763824, "incorrect SSU");
+    require(inventoryItemIdIn == 70505200487489129491533272716910408603753256595363780714882065332876101173161, "item in incorrect");
+    
+    require(ratioConfigData.ratioIn != 0, "ratio in cannot be set to 0");
+     require(ratioConfigData.ratioOut != 0, "ratio out cannot be set to 0");
     if (ratioConfigData.ratioIn == 0 || ratioConfigData.ratioOut == 0) {
       return;
     }
@@ -91,6 +99,9 @@ contract SmartStorageUnitSystem is System {
 
     TransferItem[] memory inItems = new TransferItem[](1);
     inItems[0] = TransferItem(inventoryItemIdIn, ssuOwner, quantity);
+    
+    console.log("IN");
+    console.log(quantity);
 
     TransferItem[] memory ephTransferItems = new TransferItem[](1);
     ephTransferItems[0] = TransferItem(itemObjectIdOut, ssuOwner, quantityInputItemLeftOver);

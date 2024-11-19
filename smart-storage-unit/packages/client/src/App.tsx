@@ -66,7 +66,7 @@ export const App = () => {
 						{abbreviateAddress(smartAssemblyId.toString())}
 					</div>
 
-					<BuyItem smartAssemblyId={smartAssemblyId} itemOutId={itemOutId} />
+					<BuyItem smartAssemblyId={smartAssemblyId} itemInId={itemInId} />
 
 					<SetRatio smartAssemblyId={smartAssemblyId} itemInId={itemInId} itemOutId={itemOutId} />
 				</div>
