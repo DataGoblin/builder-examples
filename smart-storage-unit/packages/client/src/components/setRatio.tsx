@@ -1,26 +1,34 @@
 import React, { useRef, useState } from "react";
 import { EveButton, EveInput } from "@eveworld/ui-components";
-import { formatEther, parseEther } from "viem";
 import { createSystemCalls } from "../mud/createSystemCalls";
+import { useRecords } from "../mud/useRecords";
+import { stash } from "../mud/stash";
+import mudConfig from "contracts/mud.config";
 
 const SetRatio = React.memo(function SetRatio() {
-	const [itemStackMultiple, setItemStackMultiple] = useState<
+	const [ratioIn, setRatioIn] = useState<
 		number | undefined
 	>();
-	const [itemPriceWei, setItemPriceWei] = useState<number | undefined>();
-	const [sellQuantity, setSellQuantity] = useState<number | undefined>();
+	const [ratioOut, setRatioOut] = useState<number | undefined>();
 
 	const smartObjectId = import.meta.env.VITE_SMARTASSEMBLY_ID;
 	const itemInId = import.meta.env.VITE_ITEM_IN_ID;
 	const itemOutId = import.meta.env.VITE_ITEM_OUT_ID;
 
-	const { getItemSellData, setRatio } = createSystemCalls();
+	const ratioConfig = useRecords({
+		stash,
+		table: mudConfig.namespaces.test.tables.RatioConfig,
+		keys: [smartObjectId, itemInId]
+	});
+	
+		console.log(ratioConfig)
+
+	const { setRatio } = createSystemCalls();
+
 
 	const fetchItemSellData = async () => {
-		const sellPriceData = await getItemSellData();
-		console.log(sellPriceData)
-		// setItemStackMultiple(Number(sellPriceData?.enforcedItemMultiple ?? 0));
-		// setItemPriceWei(Number(sellPriceData?.tokenAmount ?? 0));
+		setRatioIn(Number(ratioConfig[0].ratioIn ?? 0));
+		setRatioOut(Number(ratioConfig[0].ratioOut ?? 0));
 	};
 
 	const itemInValueRef = useRef(0);
@@ -53,8 +61,8 @@ const SetRatio = React.memo(function SetRatio() {
 					</EveButton>
 					<div className="flex flex-col">
 						<span className="text-xs">
-							{itemPriceWei && itemStackMultiple
-								? `Every ${itemStackMultiple} units of item ${itemInId} can be sold for ${formatEther(BigInt(itemPriceWei))} EVE`
+							{ratioIn && ratioOut
+								? `Every ${ratioIn} units of item ${itemInId} can be sold for ${ratioOut} units of ${itemOutId}`
 								: "No sell config set"}
 						</span>
 					</div>

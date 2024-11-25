@@ -20,19 +20,8 @@ export function createSystemCalls() {
 	const itemInId = import.meta.env.VITE_ITEM_IN_ID;
 	const itemOutId = import.meta.env.VITE_ITEM_OUT_ID;
 
-	const getItemSellData = async () => {
-		if (!worldContract) return;
-
-		const result = useRecords({
-			stash,
-			table: mudConfig.namespaces.test.tables.RatioConfig,
-			keys: [smartObjectId, itemInId],
-		})
-		return result;
-	};
-
 	const setRatio = async (qtyIn, qtyOut) => {
-		if (!worldContract) return;
+		if (!worldContract) throw new Error("No world contract found");
 
 		const hash =  await worldContract.write.test__setRatio([
 			smartObjectId,
@@ -45,7 +34,7 @@ export function createSystemCalls() {
 			wagmiConfig,
 			{hash}
 				);
-		console.log("reset task receipt", receipt);
+		console.log("set ratio tx receipt", receipt);
 
 		const result = useRecords({
 			stash,
@@ -55,25 +44,7 @@ export function createSystemCalls() {
 		return result;
 	};
 
-	const execute = async (quantity) => {
-		await worldContract.write.test__execute([
-			smartObjectId,
-			quantity,
-			itemInId,
-		]);
-		// return useStore.getState().getValue(tables.ItemTradeERC20, {smartObjectId});
-	};
-
-	const calculateOutput = async (smartObjectId, receiver) => {
-		await worldContract.write.test__updateERC20Receiver([
-			smartObjectId,
-			receiver,
-		]);
-		return useStore.getState().getValue(tables.ItemTradeERC20, {smartObjectId});
-	};
-
 	return {
-		getItemSellData,
 		setRatio,
 	};
 }

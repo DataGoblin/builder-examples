@@ -13,7 +13,7 @@ export function Explorer() {
       <button
         type="button"
         onClick={() => setOpen(!open)}
-        className="outline-none text-right p-2 leading-none text-black"
+        className="outline-none text-right p-2 leading-none text-white"
       >
         {open ? "Close" : "Explore"}
       </button>

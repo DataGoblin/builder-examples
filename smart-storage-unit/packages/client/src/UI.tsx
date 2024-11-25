@@ -14,8 +14,6 @@ export type Props = {
 export function UI({ children }: Props) {
   const { isLive, message, percentage } = useSyncProgress();  
 
-  console.log(isLive)
-
   // return (
   //   <div className="absolute inset-0 grid sm:grid-cols-[auto_16rem]">
   //     <div className="p-4 grid place-items-center">
@@ -62,27 +60,6 @@ export function UI({ children }: Props) {
         <SetRatio />
         <Execute />
 
-        {/* <ManageErc20Token smartAssemblyId={smartAssemblyId} />
-
-        <BuyItem smartAssemblyId={smartAssemblyId} itemOutId={itemOutId} />
-
-        <SellItem smartAssemblyId={smartAssemblyId} itemInId={itemInId} /> */}
-
-        <div className="Quantum-Container my-4">
-          <div>STEP 4: Collect Tokens</div>
-          <EveButton
-            typeClass="primary"
-            onClick={async (event) => {
-              event.preventDefault();
-              console.log(
-                "tokens collected:",
-                await collectTokens(smartAssemblyId, walletClient?.account?.address)
-              );
-            }}
-          >
-            Collect Tokens
-          </EveButton>
-        </div>
       </div>
     </div>
 
