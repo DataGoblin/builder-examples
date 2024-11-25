@@ -3,24 +3,23 @@ import { EveButton, EveInput } from "@eveworld/ui-components";
 import { formatEther, parseEther } from "viem";
 import { createSystemCalls } from "../mud/createSystemCalls";
 
-const SetRatio = React.memo(function SetRatio() {
+const Execute = React.memo(function Execute() {
 	const [itemStackMultiple, setItemStackMultiple] = useState<
 		number | undefined
 	>();
 	const [itemPriceWei, setItemPriceWei] = useState<number | undefined>();
 	const [sellQuantity, setSellQuantity] = useState<number | undefined>();
 
-	const smartObjectId = import.meta.env.VITE_SMARTASSEMBLY_ID;
+	const smartObjectId = BigInt(import.meta.env.VITE_SMARTASSEMBLY_ID);
 	const itemInId = import.meta.env.VITE_ITEM_IN_ID;
 	const itemOutId = import.meta.env.VITE_ITEM_OUT_ID;
 
-	const { getItemSellData, setRatio } = createSystemCalls();
+	const { setRatio } = createSystemCalls();
 
 	const fetchItemSellData = async () => {
 		const sellPriceData = await getItemSellData();
-		console.log(sellPriceData)
-		// setItemStackMultiple(Number(sellPriceData?.enforcedItemMultiple ?? 0));
-		// setItemPriceWei(Number(sellPriceData?.tokenAmount ?? 0));
+		setItemStackMultiple(Number(sellPriceData?.enforcedItemMultiple ?? 0));
+		setItemPriceWei(Number(sellPriceData?.tokenAmount ?? 0));
 	};
 
 	const itemInValueRef = useRef(0);
@@ -36,7 +35,7 @@ const SetRatio = React.memo(function SetRatio() {
 	return (
 		<>
 			<div className="Quantum-Container my-4">
-				<div>Step 1: Set Ratios</div>
+				<div>Execute transaction</div>
 				<div className="text-xs">
 					You can change this inventory item ID in the .env file
 				</div>
@@ -99,4 +98,4 @@ const SetRatio = React.memo(function SetRatio() {
 	);
 });
 
-export default SetRatio;
+export default Execute;

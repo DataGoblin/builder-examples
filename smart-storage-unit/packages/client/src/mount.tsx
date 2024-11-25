@@ -1,7 +1,7 @@
-import "tailwindcss/tailwind.css";
+import "./styles.css";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { App } from "./App.tsx";
+import { App } from "./App";
 import { Providers } from "./mud/Providers";
 import { getWorldDeploy } from "./mud/getWorldDeploy";
 import { chainId } from "./common";

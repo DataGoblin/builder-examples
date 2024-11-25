@@ -6,26 +6,28 @@ import { waitForTransactionReceipt } from "wagmi/actions";
 import { twMerge } from "tailwind-merge";
 import mudConfig from "contracts/mud.config";
 
-export function Tasks() {
+export function ratioConfig() {
   const wagmiConfig = useConfig();
   const { worldContract } = useWorldContract();
-  const tasks = useRecords({
+  const ratioConfig = useRecords({
     stash,
     table: mudConfig.namespaces.test.tables.RatioConfig,
   });
+
+  console.log(ratioConfig)
   
   return (
     <div className="font-mono whitespace-pre select-none">
       TODO{"\n"}
-      {tasks.map((task) => (
+      {ratioConfig.map((task) => (
         <span
-          key={task.id}
+          key={task.smartObjectId}
           title={serialize(task, null, 2)}
           className={twMerge(worldContract ? "cursor-pointer" : null)}
           onClick={
             worldContract
               ? async () => {
-                  if (task.completedAt) {
+                  if (task.smartObjectId) {
                     console.log("resetting task");
                     const hash = await worldContract.write.app__resetTask([
                       task.id,
