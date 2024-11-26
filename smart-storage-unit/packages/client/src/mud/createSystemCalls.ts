@@ -16,19 +16,19 @@ export function createSystemCalls() {
 	 * And must be used with the test__ prefix due to namespacing
 	 */
 
-	const smartObjectId = BigInt(import.meta.env.VITE_SMARTASSEMBLY_ID);
+	const smartObjectId = import.meta.env.VITE_SMARTASSEMBLY_ID;
 	const itemInId = import.meta.env.VITE_ITEM_IN_ID;
 	const itemOutId = import.meta.env.VITE_ITEM_OUT_ID;
 
-	const setRatio = async (qtyIn, qtyOut) => {
+	const setRatio = async ({qtyIn, qtyOut} : {qtyIn: number, qtyOut: number}) => {
 		if (!worldContract) throw new Error("No world contract found");
 
 		const hash =  await worldContract.write.test__setRatio([
-			smartObjectId,
-			itemInId,
-			itemOutId,
-			qtyIn,
-			qtyOut
+			BigInt(smartObjectId),
+			BigInt(itemInId),
+			BigInt(itemOutId),
+			BigInt(qtyIn),
+			BigInt(qtyOut)
 		])
 		const receipt = await waitForTransactionReceipt(
 			wagmiConfig,
@@ -44,7 +44,43 @@ export function createSystemCalls() {
 		return result;
 	};
 
+	const execute = async (qtyIn: number) => {
+		if (!worldContract) throw new Error("No world contract found");
+
+		const hash =  await worldContract.write.test__execute([
+			BigInt(smartObjectId),
+			BigInt(qtyIn),
+			BigInt(itemInId)
+		])
+		const receipt = await waitForTransactionReceipt(
+			wagmiConfig,
+			{hash}
+				);
+		console.log("execute tx receipt", receipt);
+
+		const result = useRecords({
+			stash,
+			table: mudConfig.namespaces.test.tables.RatioConfig,
+			keys: [smartObjectId, itemInId],
+		})
+		return result;
+	};
+
+	const calculateOutput = async (qtyIn: number) => {
+		if (!worldContract) throw new Error("No world contract found");
+
+		const output =  await worldContract.read.test__calculateOutput([
+			BigInt(smartObjectId), // InputRatio
+			BigInt(qtyIn), // OutputRatio
+			BigInt(qtyIn) // InputAmount
+		])
+
+		return output // (uint256 outputAmount, uint256 remainingInput)
+	};
+
 	return {
 		setRatio,
+		execute,
+		calculateOutput
 	};
 }

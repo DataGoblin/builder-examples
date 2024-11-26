@@ -18,17 +18,15 @@ const SetRatio = React.memo(function SetRatio() {
 	const ratioConfig = useRecords({
 		stash,
 		table: mudConfig.namespaces.test.tables.RatioConfig,
-		keys: [smartObjectId, itemInId]
+		// keys: [smartObjectId, itemInId]
 	});
-	
-		console.log(ratioConfig)
 
 	const { setRatio } = createSystemCalls();
 
-
 	const fetchItemSellData = async () => {
-		setRatioIn(Number(ratioConfig[0].ratioIn ?? 0));
-		setRatioOut(Number(ratioConfig[0].ratioOut ?? 0));
+		console.log(ratioConfig)
+		// setRatioIn(Number(ratioConfig[0].ratioIn ?? 0));
+		// setRatioOut(Number(ratioConfig[0].ratioOut ?? 0));
 	};
 
 	const itemInValueRef = useRef(0);
@@ -45,9 +43,6 @@ const SetRatio = React.memo(function SetRatio() {
 		<>
 			<div className="Quantum-Container my-4">
 				<div>Step 1: Set Ratios</div>
-				<div className="text-xs">
-					You can change this inventory item ID in the .env file
-				</div>
 				<div className="flex items-center">
 					<EveButton
 						className="mr-2"
@@ -63,26 +58,22 @@ const SetRatio = React.memo(function SetRatio() {
 						<span className="text-xs">
 							{ratioIn && ratioOut
 								? `Every ${ratioIn} units of item ${itemInId} can be sold for ${ratioOut} units of ${itemOutId}`
-								: "No sell config set"}
+								: "No ratio config set"}
 						</span>
 					</div>
 				</div>
 
-				<div className="mt-4">Set item ratios</div>
-				<div className="text-xs">
-				For this step, you must be connected as the <b>smart assembly owner</b>.
-				</div>
-				<div className="flex flex-col items-start gap-3">
+				<div className="mt-4 flex flex-col items-start gap-3">
 					<EveInput
 						inputType="numerical"
-						defaultValue={1}
+						defaultValue={ratioIn?.toString() ?? "10000"}
 						fieldName={`Item in: ${itemInId}`}
 						onChange={(str) => handleEdit(itemInValueRef, str as number)}
 					></EveInput>
 
 					<EveInput
 						inputType="numerical"
-						defaultValue={undefined}
+						defaultValue={ratioOut?.toString() ?? "20"}
 						fieldName={`Item out: ${itemOutId}`}
 						onChange={(str) => handleEdit(itemOutValueRef, str as number)}
 					></EveInput>
@@ -91,10 +82,10 @@ const SetRatio = React.memo(function SetRatio() {
 							typeClass="primary"
 							onClick={async (event) => {
 								event.preventDefault();
-								await setRatio(
-									itemInValueRef.current,
-									itemOutValueRef.current,
-								);
+								await setRatio({
+									qtyIn: itemInValueRef.current,
+									qtyOut: itemOutValueRef.current
+								});
 								fetchItemSellData();
 							}}
 						>

@@ -1,29 +1,9 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { EveButton, EveInput } from "@eveworld/ui-components";
-import { formatEther, parseEther } from "viem";
 import { createSystemCalls } from "../mud/createSystemCalls";
 
 const Execute = React.memo(function Execute() {
-	const [itemStackMultiple, setItemStackMultiple] = useState<
-		number | undefined
-	>();
-	const [itemPriceWei, setItemPriceWei] = useState<number | undefined>();
-	const [sellQuantity, setSellQuantity] = useState<number | undefined>();
-
-	const smartObjectId = BigInt(import.meta.env.VITE_SMARTASSEMBLY_ID);
-	const itemInId = import.meta.env.VITE_ITEM_IN_ID;
-	const itemOutId = import.meta.env.VITE_ITEM_OUT_ID;
-
-	const { setRatio } = createSystemCalls();
-
-	const fetchItemSellData = async () => {
-		const sellPriceData = await getItemSellData();
-		setItemStackMultiple(Number(sellPriceData?.enforcedItemMultiple ?? 0));
-		setItemPriceWei(Number(sellPriceData?.tokenAmount ?? 0));
-	};
-
-	const itemInValueRef = useRef(0);
-	const itemOutValueRef = useRef(0);
+	const { execute, calculateOutput } = createSystemCalls();
 
 	const handleEdit = (
 		refString: React.MutableRefObject<number>,
@@ -32,67 +12,41 @@ const Execute = React.memo(function Execute() {
 		refString.current = eventString;
 	};
 
+	const qtyInValueRef = useRef(0);
+
 	return (
 		<>
 			<div className="Quantum-Container my-4">
-				<div>Execute transaction</div>
-				<div className="text-xs">
-					You can change this inventory item ID in the .env file
-				</div>
-				<div className="flex items-center">
-					<EveButton
-						className="mr-2"
-						typeClass="tertiary"
-						onClick={async (event) => {
-							event.preventDefault();
-							fetchItemSellData();
-						}}
-					>
-						Fetch
-					</EveButton>
-					<div className="flex flex-col">
-						<span className="text-xs">
-							{itemPriceWei && itemStackMultiple
-								? `Every ${itemStackMultiple} units of item ${itemInId} can be sold for ${formatEther(BigInt(itemPriceWei))} EVE`
-								: "No sell config set"}
-						</span>
-					</div>
-				</div>
+				<div>Step 2: Execute transaction</div>
 
-				<div className="mt-4">Set item ratios</div>
-				<div className="text-xs">
-				For this step, you must be connected as the <b>smart assembly owner</b>.
-				</div>
-				<div className="flex flex-col items-start gap-3">
-					<EveInput
-						inputType="numerical"
-						defaultValue={1}
-						fieldName={`Item in: ${itemInId}`}
-						onChange={(str) => handleEdit(itemInValueRef, str as number)}
-					></EveInput>
+				<EveInput
+					inputType="numerical"
+					defaultValue={qtyInValueRef.current.toString()}
+					fieldName={`Quantity In`}
+					onChange={(str) => handleEdit(qtyInValueRef, str as number)}
+				></EveInput>
 
-					<EveInput
-						inputType="numerical"
-						defaultValue={undefined}
-						fieldName={`Item out: ${itemOutId}`}
-						onChange={(str) => handleEdit(itemOutValueRef, str as number)}
-					></EveInput>
-					<div>
-						<EveButton
-							typeClass="primary"
-							onClick={async (event) => {
-								event.preventDefault();
-								await setRatio(
-									itemInValueRef.current,
-									itemOutValueRef.current,
-								);
-								fetchItemSellData();
-							}}
-						>
-							Set Ratio
-						</EveButton>
-					</div>
-				</div>
+				<EveButton
+					className="mr-2"
+					typeClass="tertiary"
+					onClick={async (event) => {
+						event.preventDefault();
+						calculateOutput(qtyInValueRef.current);
+					}}
+				>
+					Calculate Output
+				</EveButton>
+
+				<EveButton
+					className="mr-2 mt-4"
+					typeClass="primary"
+					onClick={async (event) => {
+						event.preventDefault();
+						execute(qtyInValueRef.current);
+					}}
+				>
+					Execute
+				</EveButton>
 			</div>
 		</>
 	);
