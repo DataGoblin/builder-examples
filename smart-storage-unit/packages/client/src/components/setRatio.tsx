@@ -66,14 +66,14 @@ const SetRatio = React.memo(function SetRatio() {
 				<div className="mt-4 flex flex-col items-start gap-3">
 					<EveInput
 						inputType="numerical"
-						defaultValue={ratioIn?.toString() ?? "10000"}
+						defaultValue={ratioIn?.toString() ?? "0"}
 						fieldName={`Item in: ${itemInId}`}
 						onChange={(str) => handleEdit(itemInValueRef, str as number)}
 					></EveInput>
 
 					<EveInput
 						inputType="numerical"
-						defaultValue={ratioOut?.toString() ?? "20"}
+						defaultValue={ratioOut?.toString() ?? "0"}
 						fieldName={`Item out: ${itemOutId}`}
 						onChange={(str) => handleEdit(itemOutValueRef, str as number)}
 					></EveInput>
