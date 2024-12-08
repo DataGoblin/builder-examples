@@ -1,4 +1,4 @@
-ENV_FILE="./.env"
+ENV_FILE=".env"
 
 SERVER=$1
 
