@@ -1,4 +1,12 @@
 * .env=auto eol=lf
 
-*.png   binary
-*.jpg   binary
+# Treat common image types as binary
+*.png   binary -text
+*.jpg   binary -text
+*.jpeg  binary -text
+*.gif   binary -text
+*.bmp   binary -text
+*.tiff  binary -text
+*.ico   binary -text
+*.svg   binary -text
+*.webp  binary -text
