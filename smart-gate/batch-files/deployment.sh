@@ -1,6 +1,9 @@
+#FILES
 ENV_FILE="./.env"
 MUD_CONFIG_FILE="./mud.config.ts"
 CONSTANTS_FILE="./src/systems/constants.sol"
+
+#COLORS
 GREEN="\033[32m"
 YELLOW="\033[33m"
 RESET="\033[0m"
@@ -31,7 +34,6 @@ select sr in "Nebula" "Nova" "Local"; do
     esac
 done
 
-printf "\n${GREEN}[COMPLETED]${RESET} Set ${YELLOW}WORLD_ADDRESS${RESET} in ${YELLOW}.env${RESET} \n\n"
 
 pnpm deploy:local
 
