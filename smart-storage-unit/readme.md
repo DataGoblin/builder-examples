@@ -36,10 +36,10 @@ pnpm dev
 ### Step 1: Tests for the existing world **(Local Development Only)**
 To run tests to make sure that the SSU example is working, you can click on the shell process as seen in the image below, click in the terminal and then run:
 
-
 ```bash
 pnpm test
 ```
+
 ![Processes Image](../readme-imgs/processes.png)
 
 You should then see the tests pass:
@@ -55,22 +55,28 @@ cd smart-storage-unit/packages/contracts
 ```
 
 Then install the Solidity dependencies for the contracts:
+
 ```bash
 pnpm install
 ```
 
-Next, retrieve the world address through the below links depending on which server you want to deploy to and then replace <worldAddress> with the world address. 
-
-- [Nebula World Address](https://blockchain-gateway-nebula.nursery.reitnorf.com/config)
-- [Nova World Address](https://blockchain-gateway-nova.nursery.reitnorf.com/config)
-
-<br />
+Next, update the world address variable in your .env file by running this command for Nebula:
 
 ```bash
-pnpm run deploy:garnet --worldAddress <worldAddress> 
+pnpm env-nebula
 ```
 
-eg: `pnpm deploy:garnet --worldAddress 0xafc8e4fd5eee66590c93feebf526e1aa2e93c6c3`
+Or this command for Nova:
+
+```bash
+pnpm env-nova
+```
+
+Then deploy the contracts using:
+
+```bash
+pnpm run deploy:garnet
+```
 
 Once the deployment is successful, you'll see a screen similar to the one below. This process deploys the SSU contract. 
 ![alt text](../readme-imgs/deploy.png)
@@ -80,13 +86,13 @@ Next, replace the following values in the [.env](./packages/contracts/.env) file
 
 You can change values in the .env file for Nova and Nebula, though they are optional for local testing.
 
-For Nova and Nebula, Get your recovery phrase from the game wallet, import into EVE Wallet and then grab the private key from there.
+Get your recovery phrase from the game wallet, import into EVE Wallet and then grab the private key from there.
 
 ```bash
 PRIVATE_KEY=0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80
 ```
 
-For Nova and Nebula, get the world address from the configs. You can deploy your own ERC20 token or use the EVE Token address in the config
+For Nova and Nebula, get the world address from the configs.
 
 ![alt text](../readme-imgs/world-address.png)
 

@@ -35,18 +35,15 @@ This will deploy the contracts to a forked version of your local world for testi
 pnpm dev
 ```
 
-### Step 1: Tests for the existing world **(Local Development Only)**
-To run tests to make sure that the SSU example is working, you can click on the shell process as seen in the image below, click in the terminal and then run:
+### Step 1: Mock Data
+When in pnpm dev, it creates a forked version of your local world which means that any data changes are not persistent after you close pnpm dev. The next step, is to create mock data to use for the smart gate contracts.
 
-
+Go to the shell process and run this command:
 ```bash
-pnpm test
+pnpm mock-data
 ```
-![Processes Image](../readme-imgs/processes.png)
 
-You should then see the tests pass:
-
-![SSU Tests](../readme-imgs/tests-gate.png)
+This will create and deploy the smart gates as well as the smart characters.
 
 ## Deployment to Nebula / Nova<a id='Nebula'></a>
 ### Step 0: Deploy the example contracts to Nova or Nebula
@@ -69,7 +66,7 @@ Next, retrieve the world address through the below links depending on which serv
 <br />
 
 ```bash
-pnpm run deploy:garnet --worldAddress <worldAddress> 
+pnpm run deploy:garnet <worldAddress> 
 ```
 
 eg: `pnpm deploy:garnet --worldAddress 0xafc8e4fd5eee66590c93feebf526e1aa2e93c6c3`
