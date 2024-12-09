@@ -1,5 +1,5 @@
 {
-  "name": "smart-turret-example-contracts",
+  "name": "contracts",
   "version": "0.0.0",
   "private": true,
   "license": "MIT",
@@ -18,9 +18,10 @@
     "mock-data": ". ./.env && pnpm forge script ./script/MockData.s.sol:MockData --broadcast --rpc-url $RPC_URL --chain-id $CHAIN_ID --sig \"run(address)\" $WORLD_ADDRESS -vvv",
     "configure-smart-turret": ". ./.env && pnpm forge script ./script/ConfigureSmartTurret.s.sol:ConfigureSmartTurret --broadcast --rpc-url $RPC_URL --chain-id $CHAIN_ID --sig \"run(address)\" $WORLD_ADDRESS -vvv",
     "execute": ". ./.env && pnpm forge script ./script/ExecuteInProximity.s.sol:ExecuteInProximity --broadcast --rpc-url $RPC_URL --chain-id $CHAIN_ID --sig \"run(address)\" $WORLD_ADDRESS -vvvv",
-    "env-nebula": "bash ../../shell-files/ConvertEnvToServer.sh nebula",
-    "env-nova": "bash ../../shell-files/ConvertEnvToServer.sh nova",
-    "env-local": "bash ../../shell-files/ConvertEnvToLocal.sh"
+    "env-stillness": "bash ../../shell-scripts/ConvertEnvToServer.sh stillness",
+    "env-nova": "bash ../../shell-scripts/ConvertEnvToServer.sh nova",
+    "env-local": "bash ../../shell-scripts/ConvertEnvToLocal.sh",
+    "set-namespace": "bash ../../shell-scripts/SetNamespace.sh"
   },
   "dependencies": {
     "@latticexyz/cli": "2.2.14",

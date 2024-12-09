@@ -1,5 +1,5 @@
 {
-  "name": "smart-turret",
+  "name": "smart-turret-example",
   "private": true,
   "scripts": {
     "build": "pnpm recursive run build",

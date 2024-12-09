@@ -15,12 +15,12 @@ RPC_URL=$(echo "$response" | grep -o '"default":{[^}]*}' | grep -o '"http":"[^"]
 
 CHAIN_ID="17069"
 
-# If the API call didn't work - use a known world address for Nebula
+# If the API call didn't work - use a known world address for Stillness
 if [[ -z "$world_address" ]]; then
     world_address="0x972bfea201646a87dc59f042ad91254628974f0d"
 fi
 
-# If the API call didn't work - use a known RPC URL for Nebula
+# If the API call didn't work - use a known RPC URL for Stillness
 if [[ -z "$RPC_URL" ]]; then
     RPC_URL="https://garnet-rpc.dev.evefrontier.tech"
 fi

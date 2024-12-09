@@ -34,9 +34,9 @@ function validate_input(){
 }
 
 printf "Which ${YELLOW}server${RESET} do you want to deploy to?\n"
-select sr in "Nebula [Main]" "Nova [Sandbox]" "Local [Your Computer]"; do
+select sr in "Stillness [Main]" "Nova [Sandbox]" "Local [Your Computer]"; do
     case $sr in 
-        "Nebula [Main]" ) pnpm env-nebula; CHOSEN_SERVER="NEBULA"; break;;
+        "Stillness [Main]" ) pnpm env-stillness; CHOSEN_SERVER="NEBULA"; break;;
         "Nova [Sandbox]" ) pnpm env-nova; CHOSEN_SERVER="NOVA"; break;;
         "Local [Your Computer]" ) pnpm env-local; CHOSEN_SERVER="LOCAL"; break;;
     esac

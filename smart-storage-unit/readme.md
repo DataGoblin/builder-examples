@@ -5,7 +5,7 @@ This guide will walk you through the process of building contracts for a Smart S
 
 A Smart Storage Unit can be configured to automatically to trade items between the owner and other players. Exchange quantity are set by providing a ratio of items. For example with a ratio of 1:2 you can exchange, 1 ore for 2 mining crystals.
 
-You can use [Deployment and Testing in Local](#Local) to test the example on your computer and [Deployment to Nebula / Nova](#Nebula) to deploy it to the game.
+You can use [Deployment and Testing in Local](#Local) to test the example on your computer and [Deployment to Stillness / Nova](#Stillness) to deploy it to the game.
 
 ### Additional Information
 
@@ -47,8 +47,8 @@ You should then see the tests pass:
 ![SSU Tests](../readme-imgs/tests-ssu.png)
 
 
-## Deployment to Nebula / Nova<a id='Nebula'></a>
-### Step 0: Deploy the example contracts to Nova or Nebula
+## Deployment to Stillness / Nova<a id='Stillness'></a>
+### Step 0: Setup development environment
 Move to the example directory with:
 
 ```bash
@@ -61,10 +61,22 @@ Then install the Solidity dependencies for the contracts:
 pnpm install
 ```
 
-Next, convert the [.env](./packages/contracts/.env) **WORLD_ADDRESS** value to either Nebula or Nova using the following command for Nebula:
+### Step 1: Setup namespace
+Next, set the namespace for your smart contracts. This will be the namespace that you use for future development of this or other projects. 
+
+For example, you could use your username as the namespace. Once you deploy to a namespace, it will set you as the owner and only you will be able to deploy smart contracts within the namespace. 
+
+Namespaces can only contain a-z, A-Z, 0-9 and _. Set the namespace using:
 
 ```bash
-pnpm env-nebula
+pnpm set-namespace
+```
+
+### Step 2: Deploy the example contracts to Stillness or Nova
+Next, convert the [.env](./packages/contracts/.env) **WORLD_ADDRESS** value to either Stillness or Nova using the following command for Stillness:
+
+```bash
+pnpm env-stillness
 ```
 
 Or this command for Nova:
@@ -85,7 +97,7 @@ Once the deployment is successful, you'll see a screen similar to the one below.
 ### Step 1: Setup the environment variables 
 Next, replace the following values in the [.env](./packages/contracts/.env) file with the respective values 
 
-You can change values in the .env file for Nova and Nebula, though they are optional for local testing.
+You can change values in the .env file for Nova and Stillness, though they are optional for local testing.
 
 Get your recovery phrase from the game wallet, import into EVE Wallet and then grab the private key from there.
 
@@ -106,7 +118,7 @@ Once the deployment is successful, you'll see a screen similar to the one below.
 ### Step 1: Setup the environment variables 
 Next, replace the following values in the [.env](./packages/contracts/.env) file with the below steps.
 
-For Nova and Nebula, get your recovery phrase from the game wallet, import it into the EVE Wallet and then retrieve the private key from there.
+For Nova and Stillness, get your recovery phrase from the game wallet, import it into the EVE Wallet and then retrieve the private key from there.
 
 ```bash
 PRIVATE_KEY=0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80
@@ -120,7 +132,7 @@ Now set the test player private key. This will be used for the execute script, a
 TEST_PLAYER_PRIVATE_KEY=0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80
 ```
 
-For Nova or Nebula, the Smart Storage Unit ID (SSU ID) is available once you have deployed an SSU in the game.
+For Stillness or Nova, the Smart Storage Unit ID (SSU ID) is available once you have deployed an SSU in the game.
 
 Right click your Smart Storage Unit, and open the dapp window and copy the smart storage unit id.
 
@@ -131,7 +143,7 @@ Right click your Smart Storage Unit, and open the dapp window and copy the smart
 SSU_ID=34818344039668088032259299209624217066809194721387714788472158182502870248994
 ```
 
-To get the Item ID's you can use https://blockchain-gateway-nebula.nursery.reitnorf.com/types and then search for the item name.
+To get the Item ID's you can use https://blockchain-gateway-stillness.nursery.reitnorf.com/types and then search for the item name.
 
 You can use the "smartItemId" as the Item ID below.
 
