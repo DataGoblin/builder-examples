@@ -1,4 +1,4 @@
-ENV_FILE="./.env"
+ENV_FILE=".env"
 WORLD_ADDRESS="0x8a791620dd6260079bf849dc5567adc3f2fdc318"
 CHAIN_ID="31337"
 
@@ -7,7 +7,12 @@ GREEN="\033[32m"
 YELLOW="\033[33m"
 RESET="\033[0m"
 
+SERVER="Local"
+
+RPC_URL="http://127.0.0.1:8545"
+
 sed -i "s/^WORLD_ADDRESS=.*/WORLD_ADDRESS=$WORLD_ADDRESS #Local World Address/" "$ENV_FILE"
 sed -i "s/^CHAIN_ID=.*/CHAIN_ID=$CHAIN_ID #Local Chain ID/" "$ENV_FILE"
+sed -i "s|^RPC_URL=.*|RPC_URL=$RPC_URL #${SERVER} RPC URL|" "$ENV_FILE"
 
 printf "${GREEN}[COMPLETED]${RESET} Set ${YELLOW}WORLD_ADDRESS${RESET} in ${YELLOW}.env${RESET} to default ${YELLOW}Local${RESET} world address ${YELLOW}[$WORLD_ADDRESS]${RESET} \n\n"
